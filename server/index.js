@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require("express");
 const cors = require("cors");
+const path = require('path');
 const querystring = require("querystring");
 const axios = require("axios");
 const protectedRoutes = require("./routes/protectedRoutes");
@@ -12,6 +13,12 @@ const jwt = require('jsonwebtoken');
 const JWT_SECRET = process.env.JWT_SECRET; 
 const { encryptToken, decryptToken } = require("./methods/encryptionMethods");
 const redis = require('./redisClient');
+
+app.use(express.static(path.join(__dirname, '../client/build')));
+
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build/index.html'));
+});
 
 app.use(
   cors({
