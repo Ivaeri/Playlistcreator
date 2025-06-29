@@ -8,5 +8,9 @@
     "lucide-react": "^0.522.0",
     "pg": "^8.16.0",
     "redis": "^5.5.6"
-  }
+  },
+    "scripts": {
+      "build": "cd client && npm install && npm run build",
+      "start": "cd server && npm install && node index.js"
+    }
 }
