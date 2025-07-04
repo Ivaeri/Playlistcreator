@@ -56,7 +56,7 @@ const CreatePlaylist = () => {
     if (query.length < 2) return setSuggestions([]);
     const fetchSuggestions = async () => {
       const res = await fetch(
-        `https://af0b-213-101-97-200.ngrok-free.app/api/search?query=${query}`,
+        `/api/search?query=${query}`,
         {
           method: "GET",
           headers: {
@@ -110,7 +110,6 @@ const CreatePlaylist = () => {
   };
 
   const addArtist = (artist) => {
-    console.log("Artists", artists);
     setArtists((prevArtists) => {
       // Kontrollera om artisten redan finns i listan
       if (prevArtists.some((a) => a.id === artist.id)) {
@@ -141,12 +140,11 @@ const CreatePlaylist = () => {
     }
     const data = { artists };
 
-    console.log("Creating playlist with data:", data);
 
     closeModal();
     try {
       const response = await fetch(
-        "https://af0b-213-101-97-200.ngrok-free.app/api/generatePreview",
+        "/api/generatePreview",
         {
           method: "POST",
           headers: {
@@ -183,7 +181,7 @@ const CreatePlaylist = () => {
 
     try {
       const response = await fetch(
-        "https://af0b-213-101-97-200.ngrok-free.app/api/generatePlaylists",
+        "/api/generatePlaylists",
         {
           method: "POST",
           headers: {
@@ -200,7 +198,6 @@ const CreatePlaylist = () => {
       }
 
       const result = await response.json();
-      console.log("Playlist saved successfully:", result);
       alert("Playlist saved successfully!");
       setPlaylistName("");
       setShowPreviewModal(false);
